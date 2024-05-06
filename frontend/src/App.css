@@ -1,0 +1,70 @@
+.App {
+  background-color: #E0E9EC;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+}
+.App .App-header {
+  text-align: center;
+}
+.App .App-header img {
+  height: 128px;
+  padding: 20px;
+  margin-bottom: 0;
+}
+.App .App-header h1 {
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+.App form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 400px;
+  text-align: center;
+}
+.App form label {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  margin-bottom: 20px;
+}
+.App form input {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18.32px;
+  margin-top: 10px;
+}
+.App form .status-message {
+  text-align: center;
+  color: red;
+}
+.App .button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+.App button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+.App button:hover {
+  background-color: #45a049;
+}
+
+/*# sourceMappingURL=App.css.map */
