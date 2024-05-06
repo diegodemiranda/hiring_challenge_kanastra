@@ -1,3 +1,4 @@
+# docker-compose.yml
 version: '3.8'
 
 services:
@@ -5,9 +6,9 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: kanastra
+      POSTGRES_PASSWORD: kanastra_challenge
+      POSTGRES_DB: db_kanastra
     ports:
       - "5432:5432"
     volumes:
@@ -15,15 +16,12 @@ services:
 
   web:
     build: .
-    command: ["uvicorn", "backend.main:app", "--host", "${SERVER_HOST}", "--port", "${SERVER_PORT}"]
-    volumes:
-      - .:/app
+    environment:
+      - REACT_APP_API_URL=${REACT_APP_API_URL}
     ports:
       - "8000:8000"
     depends_on:
       - db
-    environment:
-      DATABASE_URL: "postgresql://${DB_USER}:${DB_PASSWORD}@localhost:5432/${DB_NAME}"
 
 volumes:
   postgres_data:
