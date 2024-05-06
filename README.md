@@ -116,6 +116,26 @@ As seguintes variáveis de ambiente são necessárias para executar a aplicaçã
 
 Essas variáveis de ambiente podem ser definidas em um arquivo `.env` na raiz do projeto.
 
+## Executando a Aplicação Manualmente
+
+Se você quiser executar a aplicação manualmente depois de gerar a imagem Docker, siga os passos abaixo:
+
+1. Construa a imagem Docker usando o `Dockerfile`. Substitua `your-image-name` pelo nome que você deseja dar à sua imagem Docker:
+
+```bash
+docker build -t your-image-name .
+```
+
+2. Inicie um contêiner a partir da imagem que você acabou de construir. Substitua `your-container-name` pelo nome que você deseja dar ao seu contêiner Docker:
+
+```bash
+docker run --name your-container-name -p 8000:8000 -d your-image-name
+```
+
+Neste comando, `-p 8000:8000` mapeia a porta 8000 do contêiner para a porta 8000 do seu host, e `-d` faz com que o contêiner seja executado em segundo plano.
+
+3. A aplicação agora estará disponível em `http://localhost:8000`.
+
 ## Contribuindo
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou um pull request.
