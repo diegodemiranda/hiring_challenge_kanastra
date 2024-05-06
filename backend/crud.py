@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from . import models
-from . import schemas
+from backend import models
+from backend import schemas
 
 
 def get_charge(db: Session, charge_id: int):

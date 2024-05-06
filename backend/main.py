@@ -8,23 +8,24 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
-from . import crud, schemas
-from .database import SessionLocal
 
-load_dotenv()
+from backend import schemas, crud
+from backend.database import SessionLocal
+
+load_dotenv('../.env')
 
 app = FastAPI()
 
 # Configuração do CORS para esse domínio
 origins = [
-    os.getenv("FRONTEND_URL"),
+    os.getenv("FRONTEND_URL", "REACT_APP_API_URL"),
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
