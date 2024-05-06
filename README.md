@@ -1,49 +1,125 @@
-# Hiring Challlenge Kanastra
+# README.md
 
-BANCO DE DADOS 
-Usei índices apropriados para campos que são comumente usados em operações de consulta.
-Otimizei consultas frequentes para garantir que elas sejam rápidas, especialmente se 
-o volume de dados aumentar.
-Considerei a normalização dos dados, se necessário, para evitar a duplicação 
-de informações e garantir a integridade dos dados.
-Esta tabela armazenará as informações básicas do devedor. As restrições UNIQUE 
-garantem que o número do documento do governo e o endereço de e-mail sejam únicos, 
-evitando duplicações.
+## Descrição do Projeto
 
-Utilizei um volume persistente, pratica comum em ambientes Docker para 
-garantir que os dados gerados pelo contêiner sejam preservados mesmo que o contêiner 
-seja destruído ou reiniciado. Isso é importante para manter a integridade e 
-persistência dos dados do banco de dados, garantindo que os dados sobrevivam 
-aos ciclos de vida do contêiner.  Isso também facilita o backup e a migração de 
-dados entre diferentes ambientes.
+Este projeto é uma aplicação web que permite a criação de cobranças. A aplicação é dividida em duas partes principais: o backend, que é uma API construída com FastAPI, e o frontend, que é uma aplicação React.
 
-Usei um arquivo .sql, para automatizar e repetir facilmente tarefas de banco de dados, 
-como as instruções para criação da estrutura de tabelas do banco de dados, incluir consultas 
-SQL em um arquivo ou inserir dados nessas tabelas. Especialmente, quando precisar executar
-as mesmas operações em diferentes ambientes ou em momentos diferentes. 
-Isso é útil para configuração, migração de dados, atualizações e outras tarefas de 
-gerenciamento de banco de dados.
+## Estrutura do backend
+
+O backend é organizado da seguinte forma:
+
+- `backend/`: Este diretório contém o código do backend da aplicação, que é uma API construída com FastAPI.
+  - `crud.py`: Este arquivo contém as operações de banco de dados para a entidade `Charge`.
+  - `database.py`: Este arquivo configura a conexão com o banco de dados.
+  - `models.py`: Este arquivo define o modelo de dados para a entidade `Charge`.
+  - `schemas.py`: Este arquivo define os esquemas Pydantic para a entidade `Charge`.
+  - `main.py`: Este é o ponto de entrada da aplicação. Ele define as rotas da API e configura o middleware.
+
+## Como Executar o Projeto
+
+1. Certifique-se de que você tem Docker e Docker Compose instalados em sua máquina.
+
+2. Navegue até o diretório que contém o arquivo `docker-compose.yml`.
+
+3. Execute o seguinte comando para construir as imagens Docker e iniciar os contêineres:
+
+```bash
+docker-compose up --build
+```
+
+4. A aplicação estará disponível em `http://localhost:8000`.
+
+## Variáveis de Ambiente
+
+As seguintes variáveis de ambiente são necessárias para executar a aplicação:
+
+- `DATABASE_URL`: A URL de conexão com o banco de dados.
+- `FRONTEND_URL`: A URL do frontend da aplicação.
+- `REACT_APP_API_URL`: A URL da API do backend.
+
+Essas variáveis de ambiente podem ser definidas em um arquivo `.env` na raiz do projeto.
 
 
-Modelo de Charge
-Neste modelo completo de Charge, adicionamos dois campos de data/hora: created_at e updated_at. O created_at registra o momento em que a carga foi criada pela primeira vez, enquanto o updated_at registra o momento em que a carga foi atualizada pela última vez. Ambos são inicializados automaticamente com o valor atual do tempo na criação de uma nova carga e atualizados automaticamente sempre que a carga é modificada.
+## Estrutura do frontend
 
-Comando para rodar o container Docker:
-docker run -e FRONTEND_URL=http://localhost:3000 -e DB_USER=kanastra -e DB_PASSWORD=kanastra_challenge -e DB_NAME=db_kanastra -e SERVER_HOST=0.0.0.0 -e SERVER_PORT=8000 -p 8000:8000 -p 5432:5432 kanastra_billing_system
+O frontend é organizado da seguinte forma:
 
-Comando para iniciar a aplicação manualmente se for preciso:
-docker exec -it kanastra_billing_system uvicorn main:app --host 0.0.0.0 --port 8000
+- `frontend/`: Este diretório contém o código do frontend da aplicação, que é uma aplicação React.
+  - `src/`: Este diretório contém o código fonte da aplicação React.
+    - `assets/`: Este diretório contém os ativos da aplicação, como imagens.
+    - `components/`: Este diretório contém os componentes React da aplicação.
+      - `ChargeForm.js`: Este componente é um formulário que permite ao usuário criar uma nova cobrança.
+    - `App.js`: Este é o componente principal da aplicação. Ele renderiza o `ChargeForm`.
+    - `App.scss`: Este arquivo contém os estilos globais da aplicação.
+    - `index.js`: Este é o ponto de entrada da aplicação React.
+    - `reportWebVitals.js`: Este arquivo é usado para relatar as métricas da web vitals para o Google Analytics.
+    - `setupTests.js`: Este arquivo é usado para configurar os testes da aplicação.
+    - `App.test.js`: Este arquivo contém os testes para o componente `App`.
 
-Sim, a estrutura do seu projeto parece estar correta para a construção da imagem Docker. Aqui está uma breve descrição de cada arquivo e diretório:
+## Como Executar o Projeto
 
-- `backend/`: Este diretório deve conter o código do backend da sua aplicação, incluindo o arquivo `main.py`.
-- `frontend/`: Este diretório deve conter o código do frontend da sua aplicação.
-- `.env`: Este arquivo deve conter as variáveis de ambiente necessárias para a sua aplicação.
-- `docker-compose.yml`: Este arquivo é usado para definir e executar aplicações Docker multi-contêiner. Se você estiver usando vários serviços (como um serviço de aplicação e um serviço de banco de dados), você pode definir todos eles neste arquivo.
-- `Dockerfile`: Este arquivo é usado para construir a imagem Docker da sua aplicação. Ele contém as instruções para construir a imagem.
-- `README.md`: Este arquivo geralmente contém informações sobre o projeto, como instruções de instalação e uso.
-- `requirements.txt`: Este arquivo deve listar todas as dependências Python necessárias para a sua aplicação.
+1. Certifique-se de que você tem Node.js e npm instalados em sua máquina.
 
-Certifique-se de que o `Dockerfile` e o `docker-compose.yml` (se presente) estão configurados corretamente para construir a imagem e executar os contêineres. Além disso, certifique-se de que todas as dependências necessárias estão listadas no `requirements.txt` e que todas as variáveis de ambiente necessárias estão definidas no arquivo `.env`.
+2. Navegue até o diretório `frontend` do projeto.
 
-Esses campos adicionais podem ser úteis para rastrear o histórico e a atividade das cargas no seu sistema. Certifique-se de que a tabela correspondente no banco de dados tenha suporte para armazenar valores de data/hora. Com este modelo completo, você tem uma representação abrangente das cargas no seu sistema, pronta para ser usada na sua aplicação FastAPI.
+3. Execute o seguinte comando para instalar as dependências do projeto:
+
+```bash
+npm install
+```
+
+4. Execute o seguinte comando para iniciar a aplicação:
+
+```bash
+npm start
+```
+
+5. A aplicação estará disponível em `http://localhost:3000`.
+
+## Variáveis de Ambiente
+
+As seguintes variáveis de ambiente são necessárias para executar a aplicação:
+
+- `REACT_APP_API_URL`: A URL da API do backend.
+
+Essas variáveis de ambiente podem ser definidas em um arquivo `.env` na raiz do diretório `frontend`.
+
+
+## Descrição da geração da imagem Docker
+
+A geração da imagem é organizado da seguinte forma:
+
+- `Dockerfile`: Este arquivo define as instruções para construir a imagem Docker para a aplicação. Ele é dividido em duas partes: a construção do frontend e a construção do backend.
+- `docker-compose.yml`: Este arquivo define os serviços que compõem a aplicação. Ele inclui um serviço para o banco de dados (Postgres) e um serviço para a aplicação web (que inclui o frontend e o backend).
+- `requirements.txt`: Este arquivo lista as dependências Python necessárias para o backend da aplicação.
+
+## Como Executar o Projeto
+
+1. Certifique-se de que você tem Docker e Docker Compose instalados em sua máquina.
+
+2. Navegue até o diretório que contém o arquivo `docker-compose.yml`.
+
+3. Execute o seguinte comando para construir as imagens Docker e iniciar os contêineres:
+
+```bash
+docker-compose up --build
+```
+
+4. A aplicação estará disponível em `http://localhost:8000`.
+
+## Variáveis de Ambiente
+
+As seguintes variáveis de ambiente são necessárias para executar a aplicação:
+
+- `DATABASE_URL`: A URL de conexão com o banco de dados.
+- `REACT_APP_API_URL`: A URL da API do backend.
+
+Essas variáveis de ambiente podem ser definidas em um arquivo `.env` na raiz do projeto.
+
+## Contribuindo
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou um pull request.
+
+## Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
