@@ -3,5 +3,5 @@ uvicorn==0.20.0
 sqlalchemy==2.0.25
 psycopg2==2.9.9
 pydantic~=2.5.3
-python-multipart==0.0.6
+python-multipart==0.0.7
 python-dotenv==0.21.0
